@@ -1,0 +1,17 @@
+{
+  "name": "demo-1",
+  "version": "1.0.0",
+  "description": "en beskrivning",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "author": "Joakim Wahlström",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
