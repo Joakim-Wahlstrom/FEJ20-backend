@@ -21,7 +21,7 @@ exports.getOneProduct = (req, res) => {
 exports.createProduct = (req, res) => {
     Product.find({ name: req.body.name })
     .then(exists => {
-        if(exists > 0) {
+        if(exists.length > 0) {
             return res.status(400).json({
                 statusCode: 400,
                 status: false,
@@ -52,7 +52,46 @@ exports.createProduct = (req, res) => {
                     message: 'Failed to create product'
                 })
             })
-            
 
+
+    })
+}
+
+exports.updateProduct = (req, res) => {
+    Product.updateOne({ _id: req.params.id }, req.body)
+    .then(() => {
+        Product.updateOne({ _id: req.params.id }, { $set: { modified: Date.now() }})
+        .then(() => {
+            res.status(200).json({
+                statusCode: 200,
+                status: true,
+                message: 'Product updated successfully'
+            })
+        })
+    })
+    .catch(() => {
+        res.status(500).json({
+            statusCode: 500,
+            status: false,
+            message: 'Failed to update product'
+        })
+    })
+}
+
+exports.deleteProduct = (req, res) => {
+    Product.deleteOne({ _id: req.params.id })
+    .then(() => {
+        res.status(200).json({
+            statusCode: 200,
+            status: true,
+            message: 'Product deleted'
+        })
+    })
+    .catch(() => {
+        res.status(500).json({
+            statusCode: 500,
+            status: false,
+            message: 'Failed to delete product'
+        })
     })
 }
