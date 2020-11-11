@@ -49,10 +49,5 @@ exports.registerUser = (req, res) => {
             })
 
         })
-
-
-
-
-
     })
 }
